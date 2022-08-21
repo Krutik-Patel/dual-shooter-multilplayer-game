@@ -47,3 +47,7 @@ while running:
             
     clock.tick(frame_rate)
     pygame.display.update()
+
+
+pygame.quit()
+exit()
