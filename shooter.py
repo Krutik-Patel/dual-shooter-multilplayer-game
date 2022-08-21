@@ -22,7 +22,7 @@ pygame.display.set_caption(GAME_NAME)
 player = elements.Shooter(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 # player = pygame.Rect(50, 50, 50, 50)
 
-
+keyPressed = False
 running = True
 while running:
     screen.fill(BACKGROUND)
@@ -30,9 +30,28 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                player.shoot(screen)
+
+            if event.key or keyPressed:
+                player.update(event.key)
+                keyPressed = True
+
+
+        if event.type == pygame.KEYUP:
+            if event.key in player.control_keys and keyPressed:
+                keyPressed = False
+            
     
 
+    if player.bullets:
+        if not player.bullets[0].keep_shooting:
+            player.bullets.pop(0)
+        for bullet in player.bullets:
+            bullet.draw(screen)
     player.draw(screen)
-    # pygame.draw.rect(screen, (0, 0, 255), player)
+            
     clock.tick(frame_rate)
     pygame.display.update()
