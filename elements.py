@@ -8,21 +8,20 @@ class Shooter:
         self.colour = (0, 0, 255)
         self.bullets = []
         self.control_keys = [pygame.K_w, pygame.K_a, pygame.K_s, pygame.K_d]
-        self.movement_speed = 1
+        self.movement_speed = 5
 
     def draw(self, screen):
         self.shooter = pygame.Rect(self.x - self.width / 2, self.y - self.height / 2, self.width, self.height)
         pygame.draw.rect(screen, self.colour, self.shooter)
 
-    def update(self, key):
-        if key == pygame.K_w:
+    def update(self, keys):
+        if keys[pygame.K_w]:
             self.y -= self.movement_speed
-            print("this is happening")
-        if key == pygame.K_a:
+        if keys[pygame.K_a]:
             self.x -= self.movement_speed
-        if key == pygame.K_s:
+        if keys[pygame.K_s]:
             self.y += self.movement_speed
-        if key == pygame.K_d:
+        if keys[pygame.K_d]:
             self.x += self.movement_speed
 
 
